@@ -3,3 +3,4 @@ openpyxl==3.0.10
 python-dotenv==0.21.0
 Telethon==1.16.4
 textblob==0.17.1
+gunicorn==19.7.1
