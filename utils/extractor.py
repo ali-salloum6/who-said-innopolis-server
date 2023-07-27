@@ -18,9 +18,9 @@ def save_channels_to_file(channels, output_file):
     with open(output_file, 'w') as file:
         file.write('\n'.join(channels))
 
-# Replace 'channels.xlsx' with the actual path to your channels.xlsx file
-channels_file = 'channels.xlsx'
-output_file = 'channels.txt'
+
+channels_file = '../data/channels.xlsx'
+output_file = '../data/channels.txt'
 
 extracted_channels = extract_channels_from_xlsx(channels_file)
 save_channels_to_file(extracted_channels, output_file)

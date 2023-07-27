@@ -14,7 +14,7 @@ app = Flask(__name__)
 api_id = os.getenv('API_ID')
 api_hash = os.getenv('API_HASH')
 phone_number = os.getenv('PHONE_NUMBER')
-filename = './channels.txt'
+filename = './data/channels.txt'
 with open(filename) as input_data:
     channels = list(item.rstrip() for item in input_data.readlines())
 
