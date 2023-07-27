@@ -4,4 +4,4 @@ WORKDIR /app
 COPY . /app
 RUN pip install -r requirements.txt
 EXPOSE 5000
-CMD export FLASK_APP=app && export FLASK_DEBUG=TRUE && flask run
+CMD export FLASK_APP=app && export FLASK_DEBUG=TRUE && python app.py
