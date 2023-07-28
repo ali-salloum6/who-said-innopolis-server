@@ -2,6 +2,7 @@ import asyncio
 from textblob import TextBlob
 from datetime import datetime, timedelta
 from telethon.sync import TelegramClient
+from telethon.sessions import StringSession
 from telethon.tl.types import InputMessagesFilterEmpty
 from flask import Flask, jsonify
 import os
@@ -13,7 +14,7 @@ app = Flask(__name__)
 
 api_id = os.getenv('API_ID')
 api_hash = os.getenv('API_HASH')
-phone_number = os.getenv('PHONE_NUMBER')
+session = os.getenv('TELEGRAM_SESSION')
 filename = './data/channels.txt'
 with open(filename) as input_data:
     channels = list(item.rstrip() for item in input_data.readlines())
@@ -33,7 +34,7 @@ def get_sentiment(text):
 
 async def get_channel_messages():
     # Create a TelegramClient instance
-    client = TelegramClient(phone_number, api_id, api_hash)
+    client = TelegramClient(StringSession(session), api_id, api_hash)
     await client.start()
 
     try:
