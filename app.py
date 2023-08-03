@@ -72,19 +72,20 @@ async def get_channel_messages():
                             todays_messages.append((channel, message))
 
         # Generate the report
-        report = f"{today.strftime('%dth of %B')}:\n"
+        report = f"{today.strftime('%d of %B')}:\n"
         if todays_messages:
-            report += "Innopolis was mentioned in the following sources:\n"
+            report += f"Innopolis was mentioned in the following {len(todays_messages)} sources:\n"
             for (channel, message) in todays_messages:
                 report += f"Sentiment: {get_sentiment(message.text)}\n"
-                report += f"Link: [Message](https://t.me/{channel}/{message.id})\n"
+                report += f"Link: https://t.me/{channel}/{message.id}\n"
                 report += f"Message: {message.message}\n"
                 report += f"Date: {message.date}\n\n"
+                report += f"##################\n\n"
         if todays_forwarded_messages:
             report += "Innopolis was forwarded in the following sources:\n"
             for (channel, message) in todays_forwarded_messages:
                 report += f"Sentiment: {get_sentiment(message.text)}\n"
-                report += f"Link: [Message](https://t.me/{channel}/{message.id})\n"
+                report += f"Link: https://t.me/{channel}/{message.id}\n"
                 report += f"Message: {message.message}\n"
                 report += f"Date: {message.date}\n\n"
         if len(todays_forwarded_messages) == 0 and len(todays_messages) == 0:
