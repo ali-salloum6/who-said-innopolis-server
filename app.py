@@ -1,5 +1,6 @@
 import asyncio
-from textblob import TextBlob
+from dostoevsky.tokenization import RegexTokenizer
+from dostoevsky.models import FastTextSocialNetworkModel
 from datetime import datetime, timedelta
 from telethon.sync import TelegramClient
 from telethon.sessions import StringSession
@@ -19,18 +20,13 @@ filename = './data/channels.txt'
 with open(filename) as input_data:
     channels = list(item.rstrip() for item in input_data.readlines())
 
+tokenizer = RegexTokenizer()
+model = FastTextSocialNetworkModel(tokenizer=tokenizer)
 
 def get_sentiment(text):
-    blob = TextBlob(text)
-    sentiment = blob.sentiment.polarity
-
-    if sentiment > 0:
-        return 'positive'
-    elif sentiment < 0:
-        return 'negative'
-    else:
-        return 'neutral'
-
+    results = model.predict([text], k=2)
+    sentiment = next(iter(results[0]))
+    return sentiment
 
 async def get_channel_messages():
     # Create a TelegramClient instance
