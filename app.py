@@ -49,7 +49,7 @@ async def get_channel_messages():
                 entity, filter=InputMessagesFilterEmpty())
 
             # Get today's date
-            today = datetime.now().date()
+            today = datetime.now().date() - timedelta(days=1)
 
             async for message in messages:
                 # Extract only the date portion of the message date
